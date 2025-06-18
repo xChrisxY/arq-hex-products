@@ -1,8 +1,8 @@
-from dataclasses import dataclasss
+from dataclasses import dataclass
 from typing import Optional 
 from datetime import datetime 
 
-@dataclasss
+@dataclass
 class Product: 
     id: Optional[int] = None 
     name: str = ""
