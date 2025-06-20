@@ -1,7 +1,7 @@
 from typing import List, Optional 
 from datetime import datetime 
 from domain.product import Product 
-from domain.product_repository import IProductRepository 
+from product.domain.repositories.product_repository import IProductRepository 
 
 class InMemoryProductRepository(IProductRepository):
     

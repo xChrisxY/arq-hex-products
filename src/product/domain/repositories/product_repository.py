@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod 
 from typing import List, Optional 
-from .product import Product 
+from ..product import Product 
 
 class IProductRepository(ABC):
     
