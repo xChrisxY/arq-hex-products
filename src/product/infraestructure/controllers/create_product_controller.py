@@ -1,6 +1,8 @@
 from fastapi import HTTPException, status
 from pydantic import BaseModel 
-from application.uses_cases.create_product_use_case import CreateProductUseCase 
+from datetime import datetime
+
+from ...application.uses_cases.create_product_use_case import CreateProductUseCase 
 
 class CreateProductRequest(BaseModel): 
     

@@ -1,9 +1,16 @@
 from fastapi import FastAPI 
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
-from infraestructure.routers.product_router import router as product_router 
+from contextlib import asynccontextmanager
+from product.infraestructure.routers.product_router import router as product_router
+from database.mysql import database
 
-app = FastAPI(title="Hexagonal Architecture API", description="Una API simple Arquitectura Hexagonal con FastAPI", version="1.0.0")
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    await database.create_tables()
+    yield
+
+app = FastAPI(title="Hexagonal Architecture API", description="Una API simple Arquitectura Hexagonal con FastAPI", version="1.0.0", lifespan=lifespan)
 
 app.add_middleware(CORSMiddleware, allow_origins = ["*"], allow_credentials = True, allow_methods = ["*"], allow_headers = ["*"])
 

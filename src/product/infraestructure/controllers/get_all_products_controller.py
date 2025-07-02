@@ -1,7 +1,7 @@
 from fastapi import HTTPException, status 
 from pydantic import BaseModel 
 from typing import List
-from application.uses_cases.get_all_products_use_case import GetAllProductsUseCase 
+from ...application.uses_cases.get_all_products_use_case import GetAllProductsUseCase 
 
 class GetAllProductsResponse(BaseModel): 
     id: int
@@ -20,8 +20,8 @@ class GetAllProductsController:
     async def handle(self) -> List[GetAllProductsResponse]:
         
         try: 
-            
             products = await self.get_all_products_use_case.execute()
+            print(f"Los productos son: {products}")
 
             products_response = [
 
@@ -30,16 +30,15 @@ class GetAllProductsController:
                     name=product.name, 
                     description=product.description, 
                     price=product.price, 
-                    created_at=product.created_at.iso_format(), 
-                    updated_at=product.updated_at.iso_format()
+                    created_at=product.created_at.isoformat() if product.created_at else None, 
+                    updated_at=product.updated_at.isoformat() if product.updated_at else None,
                 ) 
 
                 for product in products
             ]
-            
             return products_response
             
         except Exception as e:
-            return HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))    
+            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))    
         
         

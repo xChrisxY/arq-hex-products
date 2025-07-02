@@ -1,5 +1,5 @@
-from domain.product import Product 
-from product.domain.repositories.product_repository import IProductRepository 
+from ...domain.product import Product 
+from ...domain.repositories.product_repository import IProductRepository 
 
 class CreateProductUseCase: 
     
