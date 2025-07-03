@@ -17,7 +17,6 @@ class MySQLProductRepository(IProductRepository):
 
     async def create(self, product: Product) -> Product:
         # Usamos 'async with' para gestionar la sesión de forma asíncrona
-        # Next() es para obtener la primera (y única) sesión del generador
         async with self.get_db() as db_session: 
 
             try:

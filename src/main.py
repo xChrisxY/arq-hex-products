@@ -3,6 +3,7 @@ import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 from product.infraestructure.routers.product_router import router as product_router
+from user.infraestructure.routers.user_router import router as user_router
 from database.mysql import database
 
 @asynccontextmanager
@@ -15,6 +16,7 @@ app = FastAPI(title="Hexagonal Architecture API", description="Una API simple Ar
 app.add_middleware(CORSMiddleware, allow_origins = ["*"], allow_credentials = True, allow_methods = ["*"], allow_headers = ["*"])
 
 app.include_router(product_router)
+app.include_router(user_router)
 
 @app.get("/health")
 async def health_check():

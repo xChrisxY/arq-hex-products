@@ -14,11 +14,11 @@ class CreateUserUseCase:
         if not self._is_valid_email(email):
             raise ValueError('Invalid email format')
         
-        existing_user_email = self.user_repository.get_by_email(email) 
+        existing_user_email = await self.user_repository.get_by_email(email) 
         if existing_user_email:
             raise ValueError('User with this email already exists')
         
-        existing_user_username = self.user_repository.get_by_username(username)
+        existing_user_username = await self.user_repository.get_by_username(username)
         if existing_user_username: 
             raise ValueError('User with this username already exists')
 
